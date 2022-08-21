@@ -4,10 +4,10 @@ import time
 import threading
 import concurrent.futures
 
-def get_emails(file_path):
+def get_emails(filename):
     """ gets the list of emails from the csv file """
     emails = []
-    with open(file_path, 'r', newline='') as csv_file:
+    with open(filename, 'r', newline='') as csv_file:
         reader = csv.DictReader(csv_file)
         for row in reader:
             emails.append(row.get('email'))
@@ -54,10 +54,10 @@ def check_emails(emails):
 
 def export_results(result):
     header = result[0].keys()
-    with open('results.csv', 'w', newline='') as output_file:
+    with open(os.path.join('output'), 'w', newline='') as output_file:
         dict_writer = csv.DictWriter(output_file, header)
         dict_writer.writeheader()
         dict_writer.writerows(result)
 
 
-export_results(check_emails(get_emails("save_location")))
+export_results(check_emails(get_emails("input.csv")))
