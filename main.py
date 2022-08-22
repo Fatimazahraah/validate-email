@@ -33,10 +33,6 @@ def allowed_file(filename):
     def download():
         return render_template('download.html', files=os.listdir('output'))
 
-    @app.route('/download/<filename>')
-    def download_file(filename):
-        return send_from_directory('output', filename)
-
     #return app
 
 #    return app
